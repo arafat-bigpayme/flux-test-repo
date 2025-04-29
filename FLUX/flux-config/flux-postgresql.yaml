@@ -1,0 +1,24 @@
+apiVersion: fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: postgresql-repo
+  namespace: flux-system
+spec:
+  url: https://github.com/arafat-bigpayme/flux-test-repo
+  ref:
+    branch: main
+  interval: 1m
+
+---
+apiVersion: fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: postgresql-deployment
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: postgresql-repo
+  path: ./flux/postgresql/
+  interval: 10m
+  prune: true
