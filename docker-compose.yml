@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  flask-app:
+    build: .
+    ports:
+      - "5001:5000" #host_port:container_port
+    environment:
+      DB_HOST: "host.docker.internal"  # Connect to the existing PostgreSQL
+      DB_PORT: "5432"
+      DB_NAME: "arafat_database"
+      DB_USER: "test"
+      DB_PASS: "test"
+    depends_on: []
